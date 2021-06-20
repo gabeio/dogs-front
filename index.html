@@ -7,7 +7,9 @@
   </head>
   <body>
     <section class="dogs">
-      <button v-on:click="outside">Dog name</button>
+      <span v-for="dog in dogs">
+        <button v-on:click="outside">Dog name</button>
+      </span>
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
