@@ -24,8 +24,10 @@ const dogsBackend = {
 }
 
 const app = Vue.createApp({
-	data: {
-		dogs: dogsBackend.get(),
+	data() {
+		return {
+			dogs: dogsBackend.get(),
+		}
 	},
 	methods: {
 		outside: function (name) {
