@@ -85,8 +85,6 @@ const callApi = async () => {
 
 // Will run when page finishes loading
 window.onload = async () => {
-	await configureClient();
-
 	const bodyElement = document.getElementsByTagName("body")[0];
 
 	const isAuthenticated = await auth0.isAuthenticated();
