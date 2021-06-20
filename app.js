@@ -1,5 +1,9 @@
 // The Auth0 client, initialized in configureClient()
-let auth0 = null;
+let auth0 = await createAuth0Client({
+  domain: "https://gabeio.us.auth0.com",
+  client_id: "t8LupY1ApemcbNPXlT7WnoPqHCj9p7Fx",
+  audience: "https://api.dogs.gabe.io",
+});
 
 /**
  * Starts the authentication flow
@@ -34,17 +38,6 @@ const logout = () => {
   } catch (err) {
     console.log("Log out failed", err);
   }
-};
-
-/**
- * Initializes the Auth0 client
- */
-const configureClient = async () => {
-  auth0 = await createAuth0Client({
-    domain: "https://gabeio.us.auth0.com",
-    client_id: "t8LupY1ApemcbNPXlT7WnoPqHCj9p7Fx",
-    audience: "https://api.dogs.gabe.io",
-  });
 };
 
 /**
@@ -98,8 +91,6 @@ window.onload = async () => {
 
   if (isAuthenticated) {
     console.log("> User is authenticated");
-    window.history.replaceState({}, document.title, window.location.pathname);
-    updateUI();
     return;
   }
 
@@ -117,8 +108,6 @@ window.onload = async () => {
     } catch (err) {
       console.log("Error parsing redirect:", err);
     }
-
-    window.history.replaceState({}, document.title, "/");
   }
 };
 
