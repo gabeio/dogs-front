@@ -22,6 +22,7 @@ const dogsBackend = {
 			method: 'POST',
 			credentials: 'include',
 			headers: {
+				'Content-Type': 'application/json',
 				'authorization': this.jwt,
 			},
 			body: JSON.stringify(dog),
