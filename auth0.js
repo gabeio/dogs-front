@@ -121,3 +121,5 @@ window.onload = async () => {
     window.history.replaceState({}, document.title, "/");
   }
 };
+
+export auth0;
