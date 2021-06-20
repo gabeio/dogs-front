@@ -49,14 +49,14 @@ const app = Vue.createApp({
 			console.log("outside", dog)
 			dog.value = true
 			dogsBackend.set(dog)
-			this.update(dogsBackend.get())
+			dogsBackend.get()
 		},
 		inside: function (dog) {
 			//
 			console.log("inside", dog)
 			dog.value = false
 			dogsBackend.set(dog)
-			this.update(dogsBackend.get())
+			dogsBackend.get()
 		},
 		update: function (dogs) {
 			for (dog of dogs) {
@@ -73,5 +73,5 @@ const app = Vue.createApp({
 const vm = app.mount('.dogs')
 
 //console.log("interval: ", setInterval(function() {
-//	vm.dogs = dogsBackend.get()
+//	dogsBackend.get()
 //}, 5000))
