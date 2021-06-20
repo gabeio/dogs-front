@@ -92,28 +92,7 @@ const callApi = async () => {
 window.onload = async () => {
   await configureClient();
 
-  // If unable to parse the history hash, default to the root URL
-  if (!showContentFromUrl(window.location.pathname)) {
-    showContentFromUrl("/");
-    window.history.replaceState({ url: "/" }, {}, "/");
-  }
-
   const bodyElement = document.getElementsByTagName("body")[0];
-
-  // Listen out for clicks on any hyperlink that navigates to a #/ URL
-  bodyElement.addEventListener("click", (e) => {
-    if (isRouteLink(e.target)) {
-      const url = e.target.getAttribute("href");
-
-      if (showContentFromUrl(url)) {
-        e.preventDefault();
-        window.history.pushState({ url }, {}, url);
-      }
-    } else if (e.target.getAttribute("id") === "call-api") {
-      e.preventDefault();
-      callApi();
-    }
-  });
 
   const isAuthenticated = await auth0.isAuthenticated();
 
@@ -133,10 +112,6 @@ window.onload = async () => {
     console.log("> Parsing redirect");
     try {
       const result = await auth0.handleRedirectCallback();
-
-      if (result.appState && result.appState.targetUrl) {
-        showContentFromUrl(result.appState.targetUrl);
-      }
 
       console.log("Logged in!");
     } catch (err) {
