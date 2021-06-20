@@ -7,23 +7,23 @@
 		<style>[v-cloak] { display: none; }</style>
 	</head>
 	<body>
-		<section class="dogs container">
-			<span v-for="dog in dogs">
-				<span class="row" v-if="dog.value">
-					<span class="d-flex flex-column flex-sm-row">
-						<!-- <span class="d-grid gap-2"> -->
+		<section class="dogs container-fluid">
+			<div v-for="dog in dogs">
+				<div class="row" v-if="dog.value">
+					<div class="d-flex flex-column flex-sm-row">
+						<!-- <div class="d-grid gap-2"> -->
 						<button class="btn btn-danger btn-lg" v-on:click="inside(dog)"> {{ dog.name }} </button><br />
-						<!-- </span> -->
-					</span>
-				</span>
-				<span class="row" v-if="!dog.value">
-					<span class="col-3">
-						<span class="d-grid gap-2">
+						<!-- </div> -->
+					</div>
+				</div>
+				<div class="row" v-if="!dog.value">
+					<div class="col-3">
+						<div class="d-grid gap-2">
 							<button class="btn btn-success btn-lg" v-on:click="outside(dog)"> {{ dog.name }} </button><br />
-						</span>
-					</span>
-				</span>
-			</span>
+						</div>
+					</div>
+				</div>
+			</div>
 		</section>
 	
 		<script src="https://unpkg.com/async@3.2.0/dist/async.js"></script>
