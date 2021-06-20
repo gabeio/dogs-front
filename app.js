@@ -12,7 +12,11 @@ const dogsBackend = {
 		.then(response => response.json())
 		.then(data => {
 			console.log('Success:', data);
-			vm.dogs = data
+			if (vm && vm.dogs) {
+				vm.update(data)
+			} else {
+				vm.initial(data)
+			}
 		})
 	},
 	set: function (dog) {
@@ -37,6 +41,9 @@ const app = Vue.createApp({
 		}
 	},
 	methods: {
+		initial: function (dogs) {
+			this.dogs = dogs
+		},
 		outside: function (dog) {
 			//
 			console.log("outside", dog)
