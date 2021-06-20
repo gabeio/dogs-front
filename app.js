@@ -7,7 +7,7 @@ const dogsBackend = {
 			credentials: 'include',
 			headers: {
 				'authorization': this.jwt,
-			}
+			},
 		})
 		.then(response => response.json())
 		.then(data => {
@@ -17,10 +17,14 @@ const dogsBackend = {
 	},
 	set: function (dog) {
 		console.log(dog)
-//		const response = fetch(this.url, {
-//			//
-//			body: JSON.stringify(data),
-//		})
+		const response = fetch(this.url, {
+			//
+			credentials: 'include',
+			headers: {
+				'authorization': this.jwt,
+			},
+			body: JSON.stringify(dog),
+		})
 	}
 }
 
@@ -36,12 +40,14 @@ const app = Vue.createApp({
 			console.log("outside", dog)
 			dog.value = true
 			dogsBackend.set(dog)
+			this.dogs = dogsBackend.get()
 		},
 		inside: function (dog) {
 			//
 			console.log("inside", dog)
 			dog.value = false
 			dogsBackend.set(dog)
+			this.dogs = dogsBackend.get()
 		}
 	}
 })
