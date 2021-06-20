@@ -19,9 +19,9 @@ const dogsBackend = {
 			}
 		})
 	},
-	set: function (dog) {
+	set: async function (dog) {
 		console.log(dog)
-		const response = fetch(this.url, {
+		const response = await fetch(this.url, {
 			//
 			method: 'POST',
 			credentials: 'include',
@@ -45,14 +45,12 @@ const app = Vue.createApp({
 			this.dogs = dogs
 		},
 		outside: function (dog) {
-			//
 			console.log("outside", dog)
 			dog.value = true
 			dogsBackend.set(dog)
 			dogsBackend.get()
 		},
 		inside: function (dog) {
-			//
 			console.log("inside", dog)
 			dog.value = false
 			dogsBackend.set(dog)
