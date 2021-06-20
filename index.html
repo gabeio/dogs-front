@@ -7,16 +7,20 @@
 		<style>[v-cloak] { display: none; }</style>
 	</head>
 	<body>
-		<section class="dogs container-sm">
-			<span class="row" v-for="dog in dogs">
-				<span class="col" v-if="dog.value">
-					<span class="d-grid gap-2">
-						<button class="btn btn-danger btn-lg" v-on:click="inside(dog)"> {{ dog.name }} </button><br />
+		<section class="dogs container">
+			<span v-for="dog in dogs">
+				<span class="row" v-if="dog.value">
+					<span class="col">
+						<span class="d-grid gap-2">
+							<button class="btn btn-danger btn-lg" v-on:click="inside(dog)"> {{ dog.name }} </button><br />
+						</span>
 					</span>
 				</span>
-				<span class="col" v-if="!dog.value">
-					<span class="d-grid gap-2">
-						<button class="btn btn-success btn-lg" v-on:click="outside(dog)"> {{ dog.name }} </button><br />
+				<span class="row" v-if="!dog.value">
+					<span class="col" >
+						<span class="d-grid gap-2">
+							<button class="btn btn-success btn-lg" v-on:click="outside(dog)"> {{ dog.name }} </button><br />
+						</span>
 					</span>
 				</span>
 			</span>
