@@ -1,8 +1,20 @@
+const query = window.location.search;
+const shouldParseResult = query.includes("code=") && query.includes("state=");
+
 // The Auth0 client, initialized in configureClient()
 let auth0 = createAuth0Client({
 	domain: "gabeio.us.auth0.com",
 	client_id: "t8LupY1ApemcbNPXlT7WnoPqHCj9p7Fx",
 	audience: "https://api.dogs.gabe.io",
+})
+
+auth0.then(auth0 => {
+	if (shouldParseResult) {
+		const result = await auth0.handleRedirectCallback();
+	}
+	const result = await auth0.handleRedirectCallback();
+
+	return auth0
 })
 
 /**
