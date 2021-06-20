@@ -55,3 +55,7 @@ const app = Vue.createApp({
 })
 
 const vm = app.mount('.dogs')
+
+setInterval(function() {
+	vm.dogs = dogsBackend.get()
+}, 5000)
