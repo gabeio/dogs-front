@@ -18,7 +18,9 @@ const dogsBackend = {
 			}
 		})
 		.then(function () {
-			callback(null)
+			if (isFunction(callback)) {
+				callback(null)
+			}
 		})
 	},
 	set: function (dog, callback) {
@@ -33,9 +35,15 @@ const dogsBackend = {
 			body: JSON.stringify(dog),
 		})
 		.then(function () {
-			callback(null)
+			if (isFunction(callback)) {
+				callback(null)
+			}
 		})
 	}
+}
+
+function isFunction(functionToCheck) {
+	return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
 }
 
 const app = Vue.createApp({
