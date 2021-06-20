@@ -3,15 +3,16 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Dogs</title>
+		<style src="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"></style>
 		<style>[v-cloak] { display: none; }</style>
 	</head>
 	<body>
-		<section class="dogs">
-			<span v-for="dog in dogs">
-				<span v-if="dog.value">
-					<button v-on:click="inside(dog)"> {{ dog.name }} </button> {{ dog.value }} <br />
+		<section class="dogs container">
+			<span class="row" v-for="dog in dogs">
+				<span class="twelve columns" v-if="dog.value">
+					<button class="button-primary" v-on:click="inside(dog)"> {{ dog.name }} </button> {{ dog.value }} <br />
 				</span>
-				<span v-if="!dog.value">
+				<span class="twelve columns" v-if="!dog.value">
 					<button v-on:click="outside(dog)"> {{ dog.name }} </button> {{ dog.value }} <br />
 				</span>
 			</span>
