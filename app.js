@@ -1,4 +1,4 @@
-var dogsBackend = {
+const dogsBackend = {
 	fetch: function () {
 		//
 		console.log("dogsBackend: fetch")
@@ -6,7 +6,7 @@ var dogsBackend = {
 	}
 }
 
-var app = new Vue({
+const app = new Vue({
 	data: {
 		dogs: dogsBackend.fetch(),
 	},
@@ -21,3 +21,5 @@ var app = new Vue({
 		}
 	}
 })
+
+const vm = app.mount('.dogs')
