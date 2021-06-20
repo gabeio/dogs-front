@@ -10,10 +10,10 @@
 		<section class="dogs container">
 			<span v-for="dog in dogs">
 				<span class="row" v-if="dog.value">
-					<span class="col-3">
-						<span class="d-grid gap-2">
-							<button class="btn btn-danger btn-lg" v-on:click="inside(dog)"> {{ dog.name }} </button><br />
-						</span>
+					<span class="d-flex flex-column flex-sm-row">
+						<!-- <span class="d-grid gap-2"> -->
+						<button class="btn btn-danger btn-lg" v-on:click="inside(dog)"> {{ dog.name }} </button><br />
+						<!-- </span> -->
 					</span>
 				</span>
 				<span class="row" v-if="!dog.value">
