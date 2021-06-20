@@ -9,7 +9,7 @@ const dogsBackend = {
 				'authorization': this.jwt,
 			}
 		});
-		return response.json()
+		return response
 	}
 }
 
