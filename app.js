@@ -4,6 +4,7 @@ const dogsBackend = {
 	fetch: function () {
 		//
 		const response = fetch(this.url, {
+			credentials: 'include',
 			headers: {
 				'authorization': dogsBackend.jwt,
 			}
