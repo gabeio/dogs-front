@@ -17,7 +17,9 @@ const dogsBackend = {
 				vm.initial(data)
 			}
 		})
-		.then(callback)
+		.then(function () {
+			callback(null)
+		})
 	},
 	set: function (dog, callback) {
 		console.log(dog)
@@ -30,7 +32,9 @@ const dogsBackend = {
 			},
 			body: JSON.stringify(dog),
 		})
-		.then(callback)
+		.then(function () {
+			callback(null)
+		})
 	}
 }
 
