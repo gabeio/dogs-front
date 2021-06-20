@@ -3,8 +3,6 @@ let auth0 = createAuth0Client({
 	domain: "https://gabeio.us.auth0.com",
 	client_id: "t8LupY1ApemcbNPXlT7WnoPqHCj9p7Fx",
 	audience: "https://api.dogs.gabe.io",
-}).then(auth => {
-	auth0 = auth
 })
 
 /**
