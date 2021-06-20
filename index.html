@@ -1,18 +1,18 @@
 <!doctype html>
 <html data-framework="vue">
-  <head>
-    <meta charset="utf-8">
-    <title>Dogs</title>
-    <style>[v-cloak] { display: none; }</style>
-  </head>
-  <body>
-    <section class="dogs">
-      <span v-for="dog in dogs">
-        <button v-on:click="outside"> {{ dog.name }} </button><br />
-      </span>
-    </section>
-
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <script async src="app.js"></script>
-  </body>
+	<head>
+		<meta charset="utf-8">
+		<title>Dogs</title>
+		<style>[v-cloak] { display: none; }</style>
+	</head>
+	<body>
+		<section class="dogs">
+			<span v-for="dog in dogs">
+				<button v-on:click="outside"> {{ dog.name }} </button><br />
+			</span>
+		</section>
+	
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+		<script async src="app.js"></script>
+	</body>
 </html>
