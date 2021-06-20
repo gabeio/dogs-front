@@ -40,13 +40,10 @@ const logout = () => {
  * Initializes the Auth0 client
  */
 const configureClient = async () => {
-  const response = await fetchAuthConfig();
-  const config = await response.json();
-
   auth0 = await createAuth0Client({
-    domain: "",
-    client_id: "",
-    audience: "",
+    domain: "https://gabeio.us.auth0.com",
+    client_id: "t8LupY1ApemcbNPXlT7WnoPqHCj9p7Fx",
+    audience: "https://api.dogs.gabe.io",
   });
 };
 
