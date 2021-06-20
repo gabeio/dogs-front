@@ -8,7 +8,12 @@
 	<body>
 		<section class="dogs">
 			<span v-for="dog in dogs">
-				<button v-on:click="outside(dog.name)"> {{ dog.name }} </button> {{ dog.value }} <br />
+				<span v-if="dog.value">
+					<button v-on:click="inside(dog)"> {{ dog.name }} </button> {{ dog.value }} <br />
+				</span>
+				<span v-if="!dog.value">
+					<button v-on:click="outside(dog)"> {{ dog.name }} </button> {{ dog.value }} <br />
+				</span>
 			</span>
 		</section>
 	

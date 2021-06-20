@@ -15,11 +15,12 @@ const dogsBackend = {
 			vm.dogs = data
 		})
 	},
-	set: function (data) {
-		const response = fetch(this.url, {
-			//
-			body: JSON.stringify(data),
-		})
+	set: function (dog) {
+		console.log(dog)
+//		const response = fetch(this.url, {
+//			//
+//			body: JSON.stringify(data),
+//		})
 	}
 }
 
@@ -30,13 +31,17 @@ const app = Vue.createApp({
 		}
 	},
 	methods: {
-		outside: function (name) {
+		outside: function (dog) {
 			//
-			console.log("outside", name)
+			console.log("outside", dog)
+			dog.value = true
+			dogsBackend.set(dog)
 		},
-		inside: function (name) {
+		inside: function (dog) {
 			//
-			console.log("inside", name)
+			console.log("inside", dog)
+			dog.value = false
+			dogsBackend.set(dog)
 		}
 	}
 })
