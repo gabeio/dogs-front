@@ -68,7 +68,9 @@ const dogsBackend = {
 						}
 					})
 				} else {
-					login("https://dogs.gabe.io")
+					auth0.loginWithRedirect({
+						redirect_uri: window.location.origin
+					})
 				}
 			})
 		})
@@ -92,7 +94,9 @@ const dogsBackend = {
 					}
 				})
 			} else {
-				login("https://dogs.gabe.io")
+				auth0.loginWithRedirect({
+					redirect_uri: window.location.origin
+				})
 			}
 		})
 	}
