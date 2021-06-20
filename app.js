@@ -23,7 +23,7 @@ const dogsBackend = {
 	}
 }
 
-const app = new Vue({
+const app = Vue.createApp({
 	data: {
 		dogs: dogsBackend.get(),
 	},
