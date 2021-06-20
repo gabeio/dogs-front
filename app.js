@@ -12,7 +12,7 @@ const dogsBackend = {
 		.then(response => response.json())
 		.then(data => {
 			console.log('Success:', data);
-			app.dogs = data
+			vm.dogs = data
 		})
 	},
 	set: function (data) {
@@ -26,9 +26,7 @@ const dogsBackend = {
 const app = Vue.createApp({
 	data() {
 		return {
-			doggies: dogsBackend.get(),
-			dogs: [],
-			something: [],
+			dogs: dogsBackend.get(),
 		}
 	},
 	methods: {
