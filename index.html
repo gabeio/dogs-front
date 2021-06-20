@@ -3,25 +3,17 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Dogs</title>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css"></link>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 		<style>[v-cloak] { display: none; }</style>
 	</head>
 	<body>
 		<section class="dogs container-fluid">
-			<div v-for="dog in dogs">
-				<div class="row" v-if="dog.value">
-					<div class="d-flex flex-column flex-sm-row">
-						<!-- <div class="d-grid gap-2"> -->
-						<button class="btn btn-danger btn-lg" v-on:click="inside(dog)"> {{ dog.name }} </button><br />
-						<!-- </div> -->
-					</div>
+			<div class="row" v-for="dog in dogs">
+				<div class="col d-flex" v-if="dog.value">
+					<button class="btn btn-danger btn-lg" v-on:click="inside(dog)"> {{ dog.name }} </button><br />
 				</div>
-				<div class="row" v-if="!dog.value">
-					<div class="col-3">
-						<div class="d-grid gap-2">
-							<button class="btn btn-success btn-lg" v-on:click="outside(dog)"> {{ dog.name }} </button><br />
-						</div>
-					</div>
+				<div class="col d-flex" v-if="!dog.value">
+					<button class="btn btn-success btn-lg" v-on:click="outside(dog)"> {{ dog.name }} </button><br />
 				</div>
 			</div>
 		</section>
