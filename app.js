@@ -22,4 +22,4 @@ const app = new Vue({
 	}
 })
 
-const vm = app.mount('.dogs')
+const vm = app.$mount('.dogs')
