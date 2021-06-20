@@ -19,6 +19,7 @@ const dogsBackend = {
 		console.log(dog)
 		const response = fetch(this.url, {
 			//
+			method: 'POST',
 			credentials: 'include',
 			headers: {
 				'authorization': this.jwt,
