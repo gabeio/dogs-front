@@ -1,43 +1,45 @@
 // The Auth0 client, initialized in configureClient()
-let auth0 = await createAuth0Client({
-  domain: "https://gabeio.us.auth0.com",
-  client_id: "t8LupY1ApemcbNPXlT7WnoPqHCj9p7Fx",
-  audience: "https://api.dogs.gabe.io",
-});
+let auth0 = createAuth0Client({
+	domain: "https://gabeio.us.auth0.com",
+	client_id: "t8LupY1ApemcbNPXlT7WnoPqHCj9p7Fx",
+	audience: "https://api.dogs.gabe.io",
+}).then(auth => {
+	auth0 = auth
+})
 
 /**
  * Starts the authentication flow
  */
 const login = async (targetUrl) => {
-  try {
-    console.log("Logging in", targetUrl);
+	try {
+		console.log("Logging in", targetUrl);
 
-    const options = {
-      redirect_uri: window.location.origin
-    };
+		const options = {
+			redirect_uri: window.location.origin
+		};
 
-    if (targetUrl) {
-      options.appState = { targetUrl };
-    }
+		if (targetUrl) {
+			options.appState = { targetUrl };
+		}
 
-    await auth0.loginWithRedirect(options);
-  } catch (err) {
-    console.log("Log in failed", err);
-  }
+		await auth0.loginWithRedirect(options);
+	} catch (err) {
+		console.log("Log in failed", err);
+	}
 };
 
 /**
  * Executes the logout flow
  */
 const logout = () => {
-  try {
-    console.log("Logging out");
-    auth0.logout({
-      returnTo: window.location.origin
-    });
-  } catch (err) {
-    console.log("Log out failed", err);
-  }
+	try {
+		console.log("Logging out");
+		auth0.logout({
+			returnTo: window.location.origin
+		});
+	} catch (err) {
+		console.log("Log out failed", err);
+	}
 };
 
 /**
@@ -46,69 +48,69 @@ const logout = () => {
  * @param {*} fn The function to execute if the user is logged in
  */
 const requireAuth = async (fn, targetUrl) => {
-  const isAuthenticated = await auth0.isAuthenticated();
+	const isAuthenticated = await auth0.isAuthenticated();
 
-  if (isAuthenticated) {
-    return fn();
-  }
+	if (isAuthenticated) {
+		return fn();
+	}
 
-  return login(targetUrl);
+	return login(targetUrl);
 };
 
 /**
  * Calls the API endpoint with an authorization token
  */
 const callApi = async () => {
-  try {
-    const token = await auth0.getTokenSilently();
+	try {
+		const token = await auth0.getTokenSilently();
 
-    const response = await fetch("/api/external", {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+		const response = await fetch("/api/external", {
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		});
 
-    const responseData = await response.json();
-    const responseElement = document.getElementById("api-call-result");
+		const responseData = await response.json();
+		const responseElement = document.getElementById("api-call-result");
 
-    responseElement.innerText = JSON.stringify(responseData, {}, 2);
+		responseElement.innerText = JSON.stringify(responseData, {}, 2);
 
-    document.querySelectorAll("pre code").forEach(hljs.highlightBlock);
+		document.querySelectorAll("pre code").forEach(hljs.highlightBlock);
 
-    eachElement(".result-block", (c) => c.classList.add("show"));
-  } catch (e) {
-    console.error(e);
-  }
+		eachElement(".result-block", (c) => c.classList.add("show"));
+	} catch (e) {
+		console.error(e);
+	}
 };
 
 // Will run when page finishes loading
 window.onload = async () => {
-  await configureClient();
+	await configureClient();
 
-  const bodyElement = document.getElementsByTagName("body")[0];
+	const bodyElement = document.getElementsByTagName("body")[0];
 
-  const isAuthenticated = await auth0.isAuthenticated();
+	const isAuthenticated = await auth0.isAuthenticated();
 
-  if (isAuthenticated) {
-    console.log("> User is authenticated");
-    return;
-  }
+	if (isAuthenticated) {
+		console.log("> User is authenticated");
+		return;
+	}
 
-  console.log("> User not authenticated");
+	console.log("> User not authenticated");
 
-  const query = window.location.search;
-  const shouldParseResult = query.includes("code=") && query.includes("state=");
+	const query = window.location.search;
+	const shouldParseResult = query.includes("code=") && query.includes("state=");
 
-  if (shouldParseResult) {
-    console.log("> Parsing redirect");
-    try {
-      const result = await auth0.handleRedirectCallback();
+	if (shouldParseResult) {
+		console.log("> Parsing redirect");
+		try {
+			const result = await auth0.handleRedirectCallback();
 
-      console.log("Logged in!");
-    } catch (err) {
-      console.log("Error parsing redirect:", err);
-    }
-  }
+			console.log("Logged in!");
+		} catch (err) {
+			console.log("Error parsing redirect:", err);
+		}
+	}
 };
 
 
