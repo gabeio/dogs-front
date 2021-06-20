@@ -11,10 +11,14 @@
 		<section class="dogs container-fluid">
 			<div class="row" v-for="dog in dogs">
 				<div class="col d-flex" v-if="dog.value">
-					<button class="btn btn-danger btn-lg" v-on:click="inside(dog)"> {{ dog.name }} </button><br />
+					<div class="d-grid gap-2">
+						<button class="btn btn-danger btn-lg" v-on:click="inside(dog)"> {{ dog.name }} </button><br />
+					</div>
 				</div>
 				<div class="col d-flex" v-if="!dog.value">
-					<button class="btn btn-success btn-lg" v-on:click="outside(dog)"> {{ dog.name }} </button><br />
+					<div class="d-grid gap-2">
+						<button class="btn btn-success btn-lg" v-on:click="outside(dog)"> {{ dog.name }} </button><br />
+					</div>
 				</div>
 			</div>
 		</section>
