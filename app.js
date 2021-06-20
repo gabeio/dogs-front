@@ -42,15 +42,24 @@ const app = Vue.createApp({
 			console.log("outside", dog)
 			dog.value = true
 			dogsBackend.set(dog)
-			this.dogs = dogsBackend.get()
+			this.update(dogsBackend.get())
 		},
 		inside: function (dog) {
 			//
 			console.log("inside", dog)
 			dog.value = false
 			dogsBackend.set(dog)
-			this.dogs = dogsBackend.get()
-		}
+			this.update(dogsBackend.get())
+		},
+		update: function (dogs) {
+			for (dog of dogs) {
+				for (doggie of this.dogs) {
+					if (dog.name === doggie.name && dog.value != doggie.value) {
+						doggie.value = dog.value;
+					}
+				}
+			}
+		},
 	}
 })
 
