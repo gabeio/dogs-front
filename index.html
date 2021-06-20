@@ -3,17 +3,17 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Dogs</title>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"></link>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css"></link>
 		<style>[v-cloak] { display: none; }</style>
 	</head>
 	<body>
-		<section class="dogs container">
+		<section class="dogs container-fluid">
 			<span class="row" v-for="dog in dogs">
-				<span class="twelve columns" v-if="dog.value">
-					<button class="u-full-width button-primary" v-on:click="inside(dog)"> {{ dog.name }} </button><br />
+				<span class="col" v-if="dog.value">
+					<button class="btn btn-success" v-on:click="inside(dog)"> {{ dog.name }} </button><br />
 				</span>
-				<span class="twelve columns" v-if="!dog.value">
-					<button class="u-full-width" v-on:click="outside(dog)"> {{ dog.name }} </button><br />
+				<span class="col" v-if="!dog.value">
+					<button class="btn btn-danger" v-on:click="outside(dog)"> {{ dog.name }} </button><br />
 				</span>
 			</span>
 		</section>
