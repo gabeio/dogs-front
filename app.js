@@ -1,6 +1,6 @@
 // The Auth0 client, initialized in configureClient()
 let auth0 = createAuth0Client({
-	domain: "https://gabeio.us.auth0.com",
+	domain: "gabeio.us.auth0.com",
 	client_id: "t8LupY1ApemcbNPXlT7WnoPqHCj9p7Fx",
 	audience: "https://api.dogs.gabe.io",
 })
