@@ -17,12 +17,20 @@ let auth0 = createAuth0Client({
 		let description = null
 		for (queri of queries) {
 			if (queri.includes("error=")) {
-				error = queri.split("=")[1]
+				error = decodeURIComponent(queri.split("=")[1])
 			} else if (queri.includes("error_description=")) {
-				description = queri.split("=")[1]
+				description = decodeURIComponent(queri.split("=")[1])
 			}
 		}
-		alert("Error: " + error + " \n " + description)
+		const app = Vue.createApp({
+			data: function () {
+				return {
+					error: error,
+					description: description,
+				}
+			},
+			template: `<div class="alert alert-danger" role="alert">{{ error }}: {{ description }}</div>`,
+		}).mount('.dogs')
 	} else if (shouldParseResult) {
 		auth0.handleRedirectCallback().then(result => {
 			window.history.pushState("", "", '/') // remove query string
@@ -159,32 +167,3 @@ let auth0 = createAuth0Client({
 
 	return auth0
 })
-
-/**
- * Starts the authentication flow
- * /
-const login = async () => {
-	try {
-		console.log("Logging in");
-
-		await auth0.loginWithRedirect();
-	} catch (err) {
-		console.log("Log in failed", err);
-	}
-};
-
-/**
- * Executes the logout flow
- * /
-const logout = () => {
-	try {
-		console.log("Logging out");
-		auth0.logout({
-			returnTo: window.location.origin
-		});
-	} catch (err) {
-		console.log("Log out failed", err);
-	}
-};
- */
-
