@@ -6,13 +6,12 @@ let auth0 = createAuth0Client({
 	domain: "gabeio.us.auth0.com",
 	client_id: "t8LupY1ApemcbNPXlT7WnoPqHCj9p7Fx",
 	audience: "https://api.dogs.gabe.io",
-})
-
-auth0.then(auth0 => {
+}).then(auth0 => {
 	if (shouldParseResult) {
 		const result = await auth0.handleRedirectCallback();
+	} else {
+		auth0.loginWithRedirect();
 	}
-	const result = await auth0.handleRedirectCallback();
 
 	return auth0
 })
@@ -20,19 +19,11 @@ auth0.then(auth0 => {
 /**
  * Starts the authentication flow
  */
-const login = async (targetUrl) => {
+const login = async () => {
 	try {
-		console.log("Logging in", targetUrl);
+		console.log("Logging in");
 
-		const options = {
-			redirect_uri: window.location.origin
-		};
-
-		if (targetUrl) {
-			options.appState = { targetUrl };
-		}
-
-		await auth0.loginWithRedirect(options);
+		await auth0.loginWithRedirect();
 	} catch (err) {
 		console.log("Log in failed", err);
 	}
