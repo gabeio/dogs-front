@@ -25,7 +25,7 @@ let auth0 = createAuth0Client({
 								fetch(this.url, {
 									credentials: 'include',
 									headers: {
-										'authorization': token,
+										'authorization': "Bearer " + token,
 									},
 								})
 								.then(response => response.json())
@@ -51,23 +51,26 @@ let auth0 = createAuth0Client({
 					})
 				},
 				set: function (dog, callback) {
+					console.log("dogsBackend.set: auth0.then", auth0)
 					auth0.isAuthenticated().then(authed => {
 						console.log("dogsBackend.get: auth0.isAuthenticated", authed)
 						if (authed) {
-							console.log(dog)
-							fetch(this.url, {
-								method: 'POST',
-								credentials: 'include',
-								headers: {
-									'Content-Type': 'application/json',
-									'authorization': this.jwt,
-								},
-								body: JSON.stringify(dog),
-							})
-							.then(function () {
-								if (isFunction(callback)) {
-									callback(null)
-								}
+							auth0.getTokenSilently().then(token => {
+								console.log(dog)
+								fetch(this.url, {
+									method: 'POST',
+									credentials: 'include',
+									headers: {
+										'Content-Type': 'application/json',
+										'authorization': "Bearer " + token,
+									},
+									body: JSON.stringify(dog),
+								})
+								.then(function () {
+									if (isFunction(callback)) {
+										callback(null)
+									}
+								})
 							})
 						} else {
 							auth0.loginWithRedirect({
