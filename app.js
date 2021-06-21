@@ -134,7 +134,9 @@ let auth0 = createAuth0Client({
 			}, 5000))
 		})
 	} else {
-		auth0.loginWithRedirect();
+		auth0.loginWithRedirect({
+			redirect_uri: window.location.origin
+		})
 	}
 
 	return auth0
