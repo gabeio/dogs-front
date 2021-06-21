@@ -1,5 +1,6 @@
 const query = window.location.search;
 const shouldParseResult = query.includes("code=") && query.includes("state=");
+const errorsPresent = query.includes("error=") || query.inclues("error_description=");
 
 // The Auth0 client, initialized in configureClient()
 let auth0 = createAuth0Client({
@@ -10,7 +11,19 @@ let auth0 = createAuth0Client({
 }).then(auth0 => {
 	console.log("createAuth0Client: auth0", auth0)
 	console.log("shouldParseResult", shouldParseResult)
-	if (shouldParseResult) {
+	if (errorsPresent) {
+		let queries = query.split('&')
+		let error = null
+		let description = null
+		for (queri of queries) {
+			if (queri.includes("error=")) {
+				error = queri.split("=")[1]
+			} else if (queri.includes("error_description=")) {
+				description = queri.split("=")[1]
+			}
+		}
+		alert("Error: " + error + " \n " + description)
+	} else if (shouldParseResult) {
 		auth0.handleRedirectCallback().then(result => {
 			window.history.pushState("", "", '/') // remove query string
 			console.log("handleRedirectCallback: result", result)
