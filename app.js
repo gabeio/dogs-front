@@ -6,6 +6,7 @@ let auth0 = createAuth0Client({
 	domain: "gabeio.us.auth0.com",
 	client_id: "s4ZzyMC5rckYUrYXr2FmpivQ86C4imiy",
 	audience: "https://api.dogs.gabe.io",
+	cacheLocation: 'localstorage',
 }).then(auth0 => {
 	console.log("createAuth0Client: auth0", auth0)
 	console.log("shouldParseResult", shouldParseResult)
