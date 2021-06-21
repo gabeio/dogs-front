@@ -17,37 +17,35 @@ let auth0 = createAuth0Client({
 				url: "https://6fr0s1p5oc.execute-api.us-east-2.amazonaws.com/dogs",
 				jwt: "",
 				get: function (callback) {
-					auth0.then(auth0 => {
-						console.log("dogsBackend.get: auth0.then", auth0)
-						auth0.isAuthenticated().then(authed => {
-							console.log("dogsBackend.get: auth0.isAuthenticated", authed)
-							if (authed) {
-								fetch(this.url, {
-									credentials: 'include',
-									headers: {
-										'authorization': this.jwt,
-									},
-								})
-								.then(response => response.json())
-								.then(data => {
-									console.log('Success:', data);
-									if (vm && vm.dogs) {
-										vm.update(data)
-									} else {
-										vm.initial(data)
-									}
-								})
-								.then(function () {
-									if (isFunction(callback)) {
-										callback(null)
-									}
-								})
-							} else {
-								auth0.loginWithRedirect({
-									redirect_uri: window.location.origin
-								})
-							}
-						})
+					console.log("dogsBackend.get: auth0.then", auth0)
+					auth0.isAuthenticated().then(authed => {
+						console.log("dogsBackend.get: auth0.isAuthenticated", authed)
+						if (authed) {
+							fetch(this.url, {
+								credentials: 'include',
+								headers: {
+									'authorization': this.jwt,
+								},
+							})
+							.then(response => response.json())
+							.then(data => {
+								console.log('Success:', data);
+								if (vm && vm.dogs) {
+									vm.update(data)
+								} else {
+									vm.initial(data)
+								}
+							})
+							.then(function () {
+								if (isFunction(callback)) {
+									callback(null)
+								}
+							})
+						} else {
+							auth0.loginWithRedirect({
+								redirect_uri: window.location.origin
+							})
+						}
 					})
 				},
 				set: function (dog, callback) {
