@@ -21,25 +21,27 @@ let auth0 = createAuth0Client({
 					auth0.isAuthenticated().then(authed => {
 						console.log("dogsBackend.get: auth0.isAuthenticated", authed)
 						if (authed) {
-							fetch(this.url, {
-								credentials: 'include',
-								headers: {
-									'authorization': this.jwt,
-								},
-							})
-							.then(response => response.json())
-							.then(data => {
-								console.log('Success:', data);
-								if (vm && vm.dogs) {
-									vm.update(data)
-								} else {
-									vm.initial(data)
-								}
-							})
-							.then(function () {
-								if (isFunction(callback)) {
-									callback(null)
-								}
+							auth0.getTokenSilently().then(token => {
+								fetch(this.url, {
+									credentials: 'include',
+									headers: {
+										'authorization': token,
+									},
+								})
+								.then(response => response.json())
+								.then(data => {
+									console.log('Success:', data);
+									if (vm && vm.dogs) {
+										vm.update(data)
+									} else {
+										vm.initial(data)
+									}
+								})
+								.then(function () {
+									if (isFunction(callback)) {
+										callback(null)
+									}
+								})
 							})
 						} else {
 							auth0.loginWithRedirect({
