@@ -11,6 +11,7 @@ let auth0 = createAuth0Client({
 	console.log("shouldParseResult", shouldParseResult)
 	if (shouldParseResult) {
 		auth0.handleRedirectCallback().then(result => {
+			window.history.pushState("", "", '/') // remove query string
 			console.log("handleRedirectCallback: result", result)
 			const dogsBackend = {
 				url: "https://6fr0s1p5oc.execute-api.us-east-2.amazonaws.com/dogs",
