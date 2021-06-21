@@ -1,3 +1,15 @@
+Sentry.init({
+  dsn: "https://02e55cd7188542b18a05675854fce385@o52482.ingest.sentry.io/5825800",
+  integrations: [new Integrations.BrowserTracing()],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
+
+
+
 const query = window.location.search;
 const shouldParseResult = query.includes("code=") && query.includes("state=");
 const errorsPresent = query.includes("error=") || query.includes("error_description=");
