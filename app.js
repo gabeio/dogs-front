@@ -4,7 +4,7 @@ const shouldParseResult = query.includes("code=") && query.includes("state=");
 // The Auth0 client, initialized in configureClient()
 let auth0 = createAuth0Client({
 	domain: "gabeio.us.auth0.com",
-	client_id: "t8LupY1ApemcbNPXlT7WnoPqHCj9p7Fx",
+	client_id: "s4ZzyMC5rckYUrYXr2FmpivQ86C4imiy",
 	audience: "https://api.dogs.gabe.io",
 }).then(auth0 => {
 	console.log("createAuth0Client: auth0", auth0)
