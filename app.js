@@ -15,6 +15,7 @@ let auth0 = createAuth0Client({
 		let queries = query.split('&')
 		let error = null
 		let description = null
+		window.history.pushState("", "", '/') // remove query string
 		for (queri of queries) {
 			if (queri.includes("error=")) {
 				error = decodeURIComponent(queri.split("=")[1])
