@@ -10,12 +10,12 @@
 	<body>
 		<section class="dogs container-fluid">
 			<div class="row" v-for="dog in dogs">
-				<div class="col mt-lg" v-if="dog.value">
+				<div class="col pt-4" v-if="dog.value">
 					<div class="d-grid gap-2">
 						<button class="btn btn-danger btn-lg" v-on:click="inside(dog)"> Bring in {{ dog.name }} </button><br />
 					</div>
 				</div>
-				<div class="col mt-lg" v-if="!dog.value">
+				<div class="col pt-4" v-if="!dog.value">
 					<div class="d-grid gap-2">
 						<button class="btn btn-success btn-lg" v-on:click="outside(dog)"> Put out {{ dog.name }} </button><br />
 					</div>
