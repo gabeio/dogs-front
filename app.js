@@ -10,7 +10,7 @@ Sentry.init({
 
 
 
-dayjs.extend(relativeTime);
+dayjs.extend(window.dayjs_plugin_relativeTime);
 const query = window.location.search;
 const shouldParseResult = query.includes("code=") && query.includes("state=");
 const errorsPresent = query.includes("error=") || query.includes("error_description=");
