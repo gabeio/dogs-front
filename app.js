@@ -167,6 +167,7 @@ let auth0 = createAuth0Client({
 				}
 			})
 			const vm = app.mount('.dogs')
+			window.vm = vm
 			console.log("interval: ", setInterval(function() {
 				dogsBackend.get()
 			}, 5000))
