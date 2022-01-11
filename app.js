@@ -42,11 +42,6 @@ let auth0 = createAuth0Client({
 					description: description,
 				}
 			},
-			computed: {
-				since() {
-					return moment(this.updated_at).fromNow()
-				}
-			},
 			template: `<div class="alert alert-danger" role="alert">{{ error }}: {{ description }}</div>`,
 		}).mount('.dogs')
 	} else if (shouldParseResult) {
@@ -120,15 +115,18 @@ let auth0 = createAuth0Client({
 					})
 				}
 			}
-			
 			function isFunction(functionToCheck) {
 				return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
 			}
-			
 			const app = Vue.createApp({
 				data() {
 					return {
 						dogs: dogsBackend.get(),
+					}
+				},
+				computed: {
+					since() {
+						return moment(this.updated_at).fromNow()
 					}
 				},
 				methods: {
@@ -170,9 +168,7 @@ let auth0 = createAuth0Client({
 					},
 				}
 			})
-			
 			const vm = app.mount('.dogs')
-			
 			console.log("interval: ", setInterval(function() {
 				dogsBackend.get()
 			}, 5000))
