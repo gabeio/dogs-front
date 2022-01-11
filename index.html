@@ -12,22 +12,22 @@
 			<div class="row" v-for="dog in dogs">
 				<div class="col pt-5" v-if="dog.value">
 					<div class="d-grid gap-2">
-						<button class="btn btn-danger btn-lg" v-on:click="inside(dog)"> Bring in {{ dog.name }} </button><br />
+						<button class="btn btn-danger btn-lg" v-on:click="inside(dog)"> Bring in {{ dog.name }} {{ moment(dog.updated_at).fromNow() }} </button><br />
 					</div>
 				</div>
 				<div class="col pt-5" v-if="!dog.value">
 					<div class="d-grid gap-2">
-						<button class="btn btn-success btn-lg" v-on:click="outside(dog)"> Put out {{ dog.name }} </button><br />
+						<button class="btn btn-success btn-lg" v-on:click="outside(dog)"> Put out {{ dog.name }} {{ moment(dog.updated_at).fromNow(); }} </button><br />
 					</div>
 				</div>
 			</div>
 		</section>
-	
 		<script src="https://browser.sentry-cdn.com/6.7.1/bundle.min.js" integrity="sha384-+GoWV2WnDUGsSmipBvyBrWuhW8hPa/D21fH+j3NoZxDf9RgDryqh4Ug4L+7E1nxM" crossorigin="anonymous"></script>
 		<script src="https://browser.sentry-cdn.com/6.7.1/bundle.tracing.min.js" integrity="sha384-qOxN14zTU0r3W+9JaAYnMQohi2monmTNAx1i1DhAlCDh8NNx5JYiXfgL/ifXRNcq" crossorigin="anonymous"></script>
 		<script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js"></script>
 		<script src="https://unpkg.com/async@3.2.0/dist/async.js"></script>
 		<script src="https://unpkg.com/vue@next"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
 		<script src="app.js"></script>
 	</body>
 </html>
