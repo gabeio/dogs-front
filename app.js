@@ -152,13 +152,18 @@ let auth0 = createAuth0Client({
 								}
 							}
 						}
-					},
-					since: function (dog) {
-						console.log("this", this)
-						return moment(dog.updated_at).fromNow()
-					}
+					}//,
+					//since: function (dog) {
+					//	console.log("this", this)
+					//	return moment(dog.updated_at).fromNow()
+					//}
 				}
 			})
+			app.config.globalProperties.$filters = {
+				since(value) {
+					return moment(value).fromNow()
+				}
+			}
 			const vm = app.mount('.dogs')
 			window.vm = vm
 			setInterval(function() {
