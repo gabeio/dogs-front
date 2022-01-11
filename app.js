@@ -154,7 +154,7 @@ let auth0 = createAuth0Client({
 						}
 					},
 					since: function (dog) {
-						console.log(this)
+						console.log("this", this)
 						return moment(dog.updated_at).fromNow()
 					}
 				}
