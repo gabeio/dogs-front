@@ -42,6 +42,11 @@ let auth0 = createAuth0Client({
 					description: description,
 				}
 			},
+			computed: {
+				since() {
+					return moment(this.updated_at).fromNow()
+				}
+			},
 			template: `<div class="alert alert-danger" role="alert">{{ error }}: {{ description }}</div>`,
 		}).mount('.dogs')
 	} else if (shouldParseResult) {
