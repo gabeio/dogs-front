@@ -126,7 +126,7 @@ let auth0 = createAuth0Client({
 				},
 				computed: {
 					since() {
-						return moment(this.updated_at).fromNow()
+						return moment(this.dogs.updated_at).fromNow()
 					}
 				},
 				methods: {
