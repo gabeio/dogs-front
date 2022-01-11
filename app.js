@@ -156,13 +156,13 @@ let auth0 = createAuth0Client({
 					},
 					since: function (dog) {
 						console.log("this", this)
-						return dayjs('1999-01-01').from(dog.updated_at)
+						return dayjs(dog.updated_at).toNow()
 					}
 				}
 			})
 			app.config.globalProperties.$filters = {
 				since(value) {
-					return dayjs('1999-01-01').from(value)
+					return dayjs(dog.updated_at).toNow()
 				}
 			}
 			const vm = app.mount('.dogs')
