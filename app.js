@@ -21,8 +21,6 @@ let auth0 = createAuth0Client({
 	audience: "https://api.dogs.gabe.io",
 	cacheLocation: 'localstorage',
 }).then(auth0 => {
-	console.log("createAuth0Client: auth0", auth0)
-	console.log("shouldParseResult", shouldParseResult)
 	if (errorsPresent) {
 		let queries = query.split('&')
 		let error = null
@@ -47,14 +45,11 @@ let auth0 = createAuth0Client({
 	} else if (shouldParseResult) {
 		auth0.handleRedirectCallback().then(result => {
 			window.history.pushState("", "", '/') // remove query string
-			console.log("handleRedirectCallback: result", result)
 			const dogsBackend = {
 				url: "https://6fr0s1p5oc.execute-api.us-east-2.amazonaws.com/dogs",
 				jwt: "",
 				get: function (callback) {
-					console.log("dogsBackend.get: auth0.then", auth0)
 					auth0.isAuthenticated().then(authed => {
-						console.log("dogsBackend.get: auth0.isAuthenticated", authed)
 						if (authed) {
 							auth0.getTokenSilently().then(token => {
 								fetch(this.url, {
@@ -65,7 +60,6 @@ let auth0 = createAuth0Client({
 								})
 								.then(response => response.json())
 								.then(data => {
-									console.log('Success:', data);
 									if (vm && vm.dogs) {
 										vm.update(data)
 									} else {
@@ -86,12 +80,9 @@ let auth0 = createAuth0Client({
 					})
 				},
 				set: function (dog, callback) {
-					console.log("dogsBackend.set: auth0.then", auth0)
 					auth0.isAuthenticated().then(authed => {
-						console.log("dogsBackend.get: auth0.isAuthenticated", authed)
 						if (authed) {
 							auth0.getTokenSilently().then(token => {
-								console.log(dog)
 								fetch(this.url, {
 									method: 'POST',
 									credentials: 'include',
@@ -129,7 +120,6 @@ let auth0 = createAuth0Client({
 						this.dogs = dogs
 					},
 					outside: function (dog) {
-						console.log("outside", dog)
 						dog.value = true
 						async.series([
 							function (callback) {
@@ -141,7 +131,6 @@ let auth0 = createAuth0Client({
 						])
 					},
 					inside: function (dog) {
-						console.log("inside", dog)
 						dog.value = false
 						async.series([
 							function (callback) {
@@ -158,6 +147,9 @@ let auth0 = createAuth0Client({
 								if (dog.name === doggie.name && dog.value != doggie.value) {
 									doggie.value = dog.value;
 								}
+								if (dog.name === doggie.name && dog.updated_at != doggie.updated_at) {
+									doggie.updated_at = dog.updated_at;
+								}
 							}
 						}
 					},
@@ -168,9 +160,9 @@ let auth0 = createAuth0Client({
 			})
 			const vm = app.mount('.dogs')
 			window.vm = vm
-			console.log("interval: ", setInterval(function() {
+			setInterval(function() {
 				dogsBackend.get()
-			}, 5000))
+			}, 5000)
 		})
 	} else {
 		auth0.loginWithRedirect({
