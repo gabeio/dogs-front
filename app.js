@@ -124,11 +124,6 @@ let auth0 = createAuth0Client({
 						dogs: dogsBackend.get(),
 					}
 				},
-				computed: {
-					since() {
-						return moment(this.dogs.updated_at).fromNow()
-					}
-				},
 				methods: {
 					initial: function (dogs) {
 						this.dogs = dogs
@@ -166,6 +161,9 @@ let auth0 = createAuth0Client({
 							}
 						}
 					},
+					since: function (dog) {
+						return moment(dog.updated_at).fromNow()
+					}
 				}
 			})
 			const vm = app.mount('.dogs')
