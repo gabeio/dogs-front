@@ -37,6 +37,7 @@ let auth0 = createAuth0Client({
 		const app = Vue.createApp({
 			methods: {
 				logout: function () {
+					console.log("auth0 object", auth0);
 					auth0.logout();
 				},
 			},
@@ -46,7 +47,7 @@ let auth0 = createAuth0Client({
 					description: description,
 				}
 			},
-			template: `<div class="alert alert-danger" role="alert" v-on:click="logout()">{{ error }}: {{ description }}</div>`,
+			template: `<div class="alert alert-danger" role="alert" @click="logout">{{ error }}: {{ description }}</div>`,
 		}).mount('.dogs')
 	} else if (shouldParseResult) {
 		auth0.handleRedirectCallback().then(result => {
