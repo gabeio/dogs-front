@@ -1,14 +1,7 @@
 Sentry.init({
+  app,
   dsn: "https://02e55cd7188542b18a05675854fce385@o52482.ingest.sentry.io/5825800",
-  integrations: [new Sentry.Integrations.BrowserTracing()],
-
-  // Set tracesSampleRate to 1.0 to capture 100%
-  // of transactions for performance monitoring.
-  // We recommend adjusting this value in production
-  tracesSampleRate: 1.0,
 });
-
-
 
 dayjs.extend(window.dayjs_plugin_relativeTime);
 const query = window.location.search;
@@ -37,7 +30,6 @@ let auth0 = createAuth0Client({
 		const app = Vue.createApp({
 			methods: {
 				logout: function () {
-					console.log("auth0 object", auth0);
 					auth0.logout();
 				},
 			},
@@ -161,20 +153,15 @@ let auth0 = createAuth0Client({
 						}
 					},
 					since: function (dog) {
-						console.log("this", this)
 						return dayjs(dog.updated_at).fromNow()
 					}
-				}
+				},
 			})
-			app.config.globalProperties.$filters = {
-				since(value) {
-					return dayjs(dog.updated_at).fromNow()
-				}
-			}
 			const vm = app.mount('.dogs')
 			window.vm = vm
 			setInterval(function() {
 				dogsBackend.get()
+				window.vm.$forceUpdate()
 			}, 5000)
 		})
 	} else {
