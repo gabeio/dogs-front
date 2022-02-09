@@ -39,7 +39,7 @@ let auth0 = createAuth0Client({
 				logout: function () {
 					auth0.logout();
 				},
-			}
+			},
 			data: function () {
 				return {
 					error: error,
