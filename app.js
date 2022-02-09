@@ -44,7 +44,7 @@ let auth0 = createAuth0Client({
 					description: description,
 				}
 			},
-			template: `<div class="alert alert-danger" role="alert" v-on:click="logout">{{ error }}: {{ description }}</div>`,
+			template: `<div class="alert alert-danger" role="alert" v-on:click="logout()">{{ error }}: {{ description }}</div>`,
 		}).mount('.dogs')
 	} else if (shouldParseResult) {
 		auth0.handleRedirectCallback().then(result => {
