@@ -4,26 +4,24 @@
 		<meta charset="utf-8">
 		<title>Dogs</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet" integrity="sha512-wnea99uKIC3TJF7v4eKk4Y+lMz2Mklv18+r4na2Gn1abDRPPOeef95xTzdwGD9e6zXJBteMIhZ1+68QC5byJZw==" crossorigin="anonymous">
 		<style>[v-cloak] { display: none; }</style>
 		<script src="https://unpkg.com/dayjs@1.10.7" integrity="sha384-9JzPji3H5JWTDH9YVzCzwcYfi/YKvzcn/nYbC1yEmDyrKOymEnU5jb3AFgaoLtSZ" crossorigin="anonymous"></script>
 		<script src="https://unpkg.com/dayjs@1.10.7/plugin/relativeTime.js" integrity="sha384-ssUzPQXjLHLO39a9AiuwxnnyDxIvOMUxEQpqfreUaW7jLEdDAXiF6UooZRO53F6Z" crossorigin="anonymous"></script>
 	</head>
 	<body>
-		<section class="dogs container-fluid">
-			<div class="row" v-for="dog in dogs">
-				<div class="col pt-5" v-if="dog.value">
-					<div class="d-grid gap-2">
-						<button class="btn btn-danger btn-lg" v-on:click="inside(dog)"> Bring in {{ dog.name }} {{ since(dog) }} </button><br />
+		<div class="dogs relative flex flex-col justify-center overflow-hidden p-6 pt-12">
+			<div class="w-full relative bg-white sm:mx-auto">
+				<div class="mx-auto space-y-12 text-base" v-for="dog in dog">
+					<div v-if="dog.value">
+						<button class="w-full mx-auto h-14 rounded-xl bg-red-500 px-6 font-semibold text-white" v-on:click="inside(dog)">Bring in {{ dog.name }} ({{ since(dog) }})</button>
 					</div>
-				</div>
-				<div class="col pt-5" v-if="!dog.value">
-					<div class="d-grid gap-2">
-						<button class="btn btn-success btn-lg" v-on:click="outside(dog)"> Put out {{ dog.name }} {{ since(dog) }} </button><br />
+					<div v-if="!dog.value">
+						<button class="w-full mx-auto h-14 rounded-xl bg-green-500 px-6 font-semibold text-white" v-on:click="outside(dog)">Put out {{ dog.name }} ({{ since(dog) }})</button>
 					</div>
 				</div>
 			</div>
-		</section>
+		</div>
 		<script src="https://unpkg.com/@sentry/vue@6.17.6/build/bundle.vue.min.js" integrity="sha384-5lMP4KZnDzoxDpvI5v9QJZz/MeBnqyFA0I+5WnvrcYPCCGOEvB3h/Om1vtS2ysLB" crossorigin="anonymous"></script>
 		<script src="https://unpkg.com/@auth0/auth0-spa-js@1.19.4/dist/auth0-spa-js.production.js" integrity="sha384-hUX5lFCEpZt6wEt9lRkh/z56Afx+v3SQizEuyCDFCiCWmpY87mELrzYQ7HHnMMet" crossorigin="anonymous"></script>
 		<script src="https://unpkg.com/async@3.2.3" integrity="sha384-ZzMVvWjauyL6xmyLkdWg1SQ8Q837w5zUaASzYWOIaE5W3yCXwGnJ7+hKPdlMjQo5" crossorigin="anonymous"></script>
