@@ -35,7 +35,7 @@ let auth0 = createAuth0Client({
           description: description,
         };
       },
-      template: `<div class="alert alert-danger" role="alert" @click="logout">{{ error }}: {{ description }}</div>`,
+      template: `<button class="w-full mx-auto h-14 rounded-xl bg-red-500 px-6 font-semibold text-white" @click="logout">{{ error }}: {{ description }}</button>`,
     }).mount(".dogs");
   } else if (shouldParseResult) {
     auth0.handleRedirectCallback().then((result) => {
