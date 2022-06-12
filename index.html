@@ -10,9 +10,9 @@
 		<script src="https://unpkg.com/dayjs@1.10.7/plugin/relativeTime.js" integrity="sha384-ssUzPQXjLHLO39a9AiuwxnnyDxIvOMUxEQpqfreUaW7jLEdDAXiF6UooZRO53F6Z" crossorigin="anonymous"></script>
 	</head>
 	<body>
-		<div class="relative flex flex-col justify-center overflow-hidden p-6 pt-12">
-			<div class="dogs w-full relative bg-white sm:mx-auto">
-				<div class="mx-auto space-y-12 text-base" v-for="dog in dog">
+		<div class="dogs relative flex flex-col justify-center overflow-hidden p-6 pt-12">
+			<div class="w-full relative bg-white sm:mx-auto">
+				<div class="mx-auto space-y-12 text-base" v-for="dog in dogs">
 					<div v-if="dog.value">
 						<button class="w-full mx-auto h-14 rounded-xl bg-red-500 px-6 font-semibold text-white" v-on:click="inside(dog)">Bring in {{ dog.name }} ({{ since(dog) }})</button>
 					</div>
