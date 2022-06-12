@@ -12,7 +12,7 @@
 	<body>
 		<div class="dogs relative flex flex-col justify-center overflow-hidden p-6 pt-12" v-cloak>
 			<div class="w-full relative bg-white sm:mx-auto">
-				<div class="mx-auto space-y-14 text-base">
+				<div class="mx-auto space-y-20 text-base">
 					<div v-for="dog in dogs">
 						<div v-if="dog.value">
 							<button class="w-full mx-auto h-14 rounded-xl bg-red-500 px-6 font-semibold text-white" v-on:click="inside(dog)">Bring in {{ dog.name }} ({{ since(dog) }})</button>
